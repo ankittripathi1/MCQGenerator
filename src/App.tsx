@@ -1,11 +1,9 @@
-import Navigation from "./components/Navigation";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-    <div className="min-h-screen text-white">
-      <Navigation />
-      <div className="h-[90vh]">i</div>
-      <div className="h-[90vh]">i</div>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <LandingPage />
     </div>
   );
 }
