@@ -1,6 +1,7 @@
-import { Brain } from "lucide-react";
+import { Brain, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -66,7 +67,7 @@ export default function Navigation() {
                     item.onClick();
                   }
                 }}
-                className="text-sm text- hove:text-forground transition-all duration-300"
+                className="text-sm text- hove:text-white transition-all duration-300"
               >
                 {item.name}
               </a>
@@ -74,10 +75,50 @@ export default function Navigation() {
             <Button
               onClick={() => scrollToSection("cta")}
               size={"sm"}
-              className="button-gradient"
+              className="bg-gradient-to-r from-[#3aee7c] to-[#22c55e] hover:opacity-90 transition-opacity rounded-full"
             >
               Get Started
             </Button>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant={"outline"} size={"icon"} className="glass ">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="bg-[#1B1B1B] text-white border-0">
+                <div className="flex flex-col gap-4 mt-8">
+                  {navItems.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="text-lg text-[#A3A3A3] hove:text-white transition-colors"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsMobileMenuOpen(false);
+                        if (item.onClick) {
+                          item.onClick();
+                        }
+                      }}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                  <Button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      scrollToSection("cta");
+                    }}
+                    className="bg-gradient-to-r from-[#3aee7c] to-[#22c55e] hover:opacity-90 transition-opacity rounded-full mt-4"
+                  >
+                    Get Started
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </nav>
       </div>
